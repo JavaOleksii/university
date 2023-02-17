@@ -1,10 +1,17 @@
 package com.pasteruk.domain;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Table(name = "faculty")
 public class Faculty {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+    @Column
     private String name;
+    @Column
     private Integer numberOfSeats;
 
     public Faculty() {

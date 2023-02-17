@@ -1,9 +1,15 @@
 package com.pasteruk.domain;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Table(name = "subject")
 public class Subject {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+    @Column
     private String name;
 
     public Subject() {

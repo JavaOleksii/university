@@ -1,29 +1,45 @@
 package com.pasteruk.domain;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Table(name = "rating")
 public class Rating {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    private Integer facultyId;
-    private Integer applicantId;
-    private Integer subjectId;
+    @ManyToOne
+    @JoinColumn(name = "faculty_id", referencedColumnName = "id")
+    private Faculty faculty;
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
+    @ManyToOne
+    @JoinColumn(name = "subject_id", referencedColumnName = "id")
+    private Subject subject;
+    @Column
     private Integer points;
+
+//    private Integer facultyId;
+//    private Integer userId;
+//    private Integer subjectId;
 
     public Rating() {
     }
 
-    public Rating(Integer facultyId, Integer applicantId, Integer subjectId, Integer points) {
-        this.facultyId = facultyId;
-        this.applicantId = applicantId;
-        this.subjectId = subjectId;
+    public Rating(Faculty faculty, User user, Subject subject, Integer points) {
+        this.faculty = faculty;
+        this.user = user;
+        this.subject = subject;
         this.points = points;
     }
 
-    public Rating(Integer id, Integer facultyId, Integer applicantId, Integer subjectId, Integer points) {
+    public Rating(Integer id, Faculty faculty, User user, Subject subject, Integer points) {
         this.id = id;
-        this.facultyId = facultyId;
-        this.applicantId = applicantId;
-        this.subjectId = subjectId;
+        this.faculty = faculty;
+        this.user = user;
+        this.subject = subject;
         this.points = points;
     }
 
@@ -35,28 +51,28 @@ public class Rating {
         this.id = id;
     }
 
-    public Integer getFacultyId() {
-        return facultyId;
+    public Faculty getFaculty() {
+        return faculty;
     }
 
-    public void setFacultyId(Integer facultyId) {
-        this.facultyId = facultyId;
+    public void setFaculty(Faculty faculty) {
+        this.faculty = faculty;
     }
 
-    public Integer getApplicantId() {
-        return applicantId;
+    public User getUser() {
+        return user;
     }
 
-    public void setApplicantId(Integer applicantId) {
-        this.applicantId = applicantId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public Integer getSubjectId() {
-        return subjectId;
+    public Subject getSubject() {
+        return subject;
     }
 
-    public void setSubjectId(Integer subjectId) {
-        this.subjectId = subjectId;
+    public void setSubject(Subject subject) {
+        this.subject = subject;
     }
 
     public Integer getPoints() {
@@ -72,21 +88,21 @@ public class Rating {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Rating rating = (Rating) o;
-        return id.equals(rating.id) && facultyId.equals(rating.facultyId) && applicantId.equals(rating.applicantId) && subjectId.equals(rating.subjectId) && points.equals(rating.points);
+        return id.equals(rating.id) && faculty.equals(rating.faculty) && user.equals(rating.user) && subject.equals(rating.subject) && points.equals(rating.points);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, facultyId, applicantId, subjectId, points);
+        return Objects.hash(id, faculty, user, subject, points);
     }
 
     @Override
     public String toString() {
         return "Rating{" +
                 "id=" + id +
-                ", facultyId=" + facultyId +
-                ", applicantId=" + applicantId +
-                ", subjectId=" + subjectId +
+                ", faculty=" + faculty +
+                ", user=" + user +
+                ", subject=" + subject +
                 ", points=" + points +
                 '}';
     }

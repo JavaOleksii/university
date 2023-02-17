@@ -1,19 +1,41 @@
 package com.pasteruk.domain;
 
+import javax.persistence.*;
 import java.util.Objects;
 
-public class Applicant {
+@Entity
+@Table(name = "user")
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+//    @Column
     private String firstName;
+//    @Column
     private String lastName;
+//    @Column
     private String email;
+//    @Column
     private String password;
+//    @Column
+    private String passwordConfirm;
+//    @Column
+    @Enumerated(EnumType.STRING)
     private UserRole role;
 
-    public Applicant() {
+    public User() {
     }
 
-    public Applicant(String firstName, String lastName, String email, String password, UserRole role) {
+    public User(User user) {
+        this.id = user.id;
+        this.firstName = user.firstName;
+        this.lastName = user.lastName;
+        this.email = user.email;
+        this.password = user.password;
+        this.role = user.role;
+    }
+
+    public User(String firstName, String lastName, String email, String password, UserRole role) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -21,7 +43,7 @@ public class Applicant {
         this.role = role;
     }
 
-    public Applicant(Integer id, String firstName, String lastName, String email, String password, UserRole role) {
+    public User(Integer id, String firstName, String lastName, String email, String password, UserRole role) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -78,12 +100,20 @@ public class Applicant {
         this.role = role;
     }
 
+    public String getPasswordConfirm() {
+        return passwordConfirm;
+    }
+
+    public void setPasswordConfirm(String passwordConfirm) {
+        this.passwordConfirm = passwordConfirm;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Applicant applicant = (Applicant) o;
-        return id.equals(applicant.id) && firstName.equals(applicant.firstName) && lastName.equals(applicant.lastName) && email.equals(applicant.email) && password.equals(applicant.password) && role == applicant.role;
+        User user = (User) o;
+        return id.equals(user.id) && firstName.equals(user.firstName) && lastName.equals(user.lastName) && email.equals(user.email) && password.equals(user.password) && role == user.role;
     }
 
     @Override
@@ -93,7 +123,7 @@ public class Applicant {
 
     @Override
     public String toString() {
-        return "Applicant{" +
+        return "User{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
