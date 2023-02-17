@@ -7,15 +7,20 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.pasteruk.dao.UserRepository;
+import com.pasteruk.domain.Faculty;
 import com.pasteruk.domain.User;
+import com.pasteruk.service.FacultiesService;
 import com.pasteruk.service.UserService;
 
 @Controller
 public class UserController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private FacultiesService facultiesService;
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
@@ -42,7 +47,14 @@ public class UserController {
     }
 
     @RequestMapping(value = "/home", method = RequestMethod.GET)
-    public String welcome(Model model) {
-        return "home";
+    public ModelAndView welcome() {
+        ModelAndView map = new ModelAndView("home");
+        map.addObject("faculties", facultiesService.getAllFaculties());
+        return map;
+    }
+
+    @RequestMapping(value = "/create-faculty", method = RequestMethod.GET)
+    public ModelAndView createFaculty() {
+        return new ModelAndView("createFaculty", "faculty", new Faculty());
     }
 }
