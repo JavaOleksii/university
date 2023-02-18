@@ -9,9 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.pasteruk.dao.UserRepository;
-import com.pasteruk.domain.Faculty;
+
+import com.pasteruk.domain.Subject;
 import com.pasteruk.domain.User;
+import com.pasteruk.service.SubjectsService;
 import com.pasteruk.service.FacultiesService;
 import com.pasteruk.service.UserService;
 
@@ -21,6 +22,8 @@ public class UserController {
     private UserService userService;
     @Autowired
     private FacultiesService facultiesService;
+    @Autowired
+    private SubjectsService subjectsService;
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
@@ -50,11 +53,17 @@ public class UserController {
     public ModelAndView welcome() {
         ModelAndView map = new ModelAndView("home");
         map.addObject("faculties", facultiesService.getAllFaculties());
+        map.addObject("subjects", subjectsService.getAllSubjects());
         return map;
     }
 
     @RequestMapping(value = "/create-faculty", method = RequestMethod.GET)
-    public ModelAndView createFaculty() {
-        return new ModelAndView("createFaculty", "faculty", new Faculty());
+    public String createFaculty() {
+        return "createFaculty";
+    }
+
+    @RequestMapping(value ="/create-subject", method = RequestMethod.GET)
+    public ModelAndView createSubject() {
+        return new ModelAndView("createSubject", "subject", new Subject());
     }
 }

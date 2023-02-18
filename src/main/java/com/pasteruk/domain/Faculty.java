@@ -1,6 +1,7 @@
 package com.pasteruk.domain;
 
 import javax.persistence.*;
+import javax.persistence.Lob;
 import java.util.Objects;
 
 @Entity
@@ -13,6 +14,8 @@ public class Faculty {
     private String name;
     @Column
     private Integer numberOfSeats;
+    @Lob
+    private String encodedImage;
 
     public Faculty() {
     }
@@ -50,6 +53,14 @@ public class Faculty {
 
     public void setNumberOfSeats(Integer numberOfSeats) {
         this.numberOfSeats = numberOfSeats;
+    }
+
+    public String getEncodedImage() {
+        return encodedImage;
+    }
+
+    public void setEncodedImage(String encodedImage) {
+        this.encodedImage = encodedImage;
     }
 
     @Override

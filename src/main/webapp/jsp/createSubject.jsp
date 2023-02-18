@@ -7,7 +7,7 @@
 
 <head>
     <meta charset="ISO-8859-1">
-    <title>Faculties</title>
+    <title>Subjects</title>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 
@@ -18,15 +18,14 @@
     <div class="w3-sidebar w3-light-grey w3-bar-block" style="width: 10%">
         <h3 class="w3-bar-item">Menu</h3>
         <a href="/home" class="w3-bar-item w3-button">Home</a>
-        <a href="/create-faculty" class="w3-bar-item w3-button">Create Faculty</a>
+        <a href="/create-subject" class="w3-bar-item w3-button">Create Subject</a>
         <a href="#" class="w3-bar-item w3-button">List</a>
-        <a href="/ratings" class="w3-bar-item w3-button">Rating</a>
     </div>
 
     <!-- Page Content -->
     <div style="margin-left: 10%">
         <div class="w3-container w3-teal">
-            <h1>Create New Faculty</h1>
+            <h1>Create New Subject</h1>
         </div>
         <div class="w3-container">
             <c:if test="${pageContext.request.userPrincipal.name != null}">
@@ -40,19 +39,11 @@
                 </h2>
             </c:if>
 
-            <form:form method="POST" action="${contextPath}/addFaculty" enctype="multipart/form-data">
+            <form:form method="POST" action="${contextPath}/addSubject" modelAttribute="subject">
                 <table>
                     <tr>
-                        <td>Name</td>
-                        <td><input type="text" name="name"/></td>
-                    </tr>
-                    <tr>
-                        <td>Number of Seats</td>
-                        <td><input type="number" name="numberOfSeats"/></td>
-                    </tr>
-                    <tr>
-                        <td>Select an image to upload</td>
-                        <td><input type="file" name="image" /></td>
+                        <td><form:label path="name">Name</form:label></td>
+                        <td><form:input path="name"/></td>
                     </tr>
                     <tr>
                         <td><input type="submit" value="Submit"/></td>
@@ -63,6 +54,7 @@
             </form:form>
         </div>
     </div>
+
 </div>
 
 <%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>--%>

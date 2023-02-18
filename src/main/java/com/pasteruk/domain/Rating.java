@@ -2,6 +2,7 @@ package com.pasteruk.domain;
 
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.Date;
 
 @Entity
 @Table(name = "rating")
@@ -26,6 +27,10 @@ public class Rating {
 //    private Integer subjectId;
 
     public Rating() {
+    }
+
+    public Rating(Integer id) {
+        this.id = id;
     }
 
     public Rating(Faculty faculty, User user, Subject subject, Integer points) {

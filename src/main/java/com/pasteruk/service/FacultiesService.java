@@ -21,4 +21,8 @@ public class FacultiesService {
     public List<Faculty> getAllFaculties() {
         return facultyRepository.findAll();
     }
+
+    public Faculty findById(Integer id) {
+        return facultyRepository.findById(id).get();
+    }
 }

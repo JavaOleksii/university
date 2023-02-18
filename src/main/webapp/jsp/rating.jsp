@@ -7,7 +7,7 @@
 
 <head>
     <meta charset="ISO-8859-1">
-    <title>Faculties</title>
+    <title>Rating</title>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 
@@ -19,8 +19,9 @@
         <h3 class="w3-bar-item">Menu</h3>
         <a href="/home" class="w3-bar-item w3-button">Home</a>
         <a href="/create-faculty" class="w3-bar-item w3-button">Create Faculty</a>
+        <a href="/create-subject" class="w3-bar-item w3-button">Create Subject</a>
         <a href="#" class="w3-bar-item w3-button">List</a>
-        <a href="/ratings" class="w3-bar-item w3-button">Rating</a>
+        </a> <a href="/ratings" class="w3-bar-item w3-button">Rating</a>
     </div>
 
     <!-- Page Content -->
@@ -28,6 +29,7 @@
         <div class="w3-container w3-teal">
             <h1>Create New Faculty</h1>
         </div>
+
         <div class="w3-container">
             <c:if test="${pageContext.request.userPrincipal.name != null}">
                 <form id="logoutForm" method="POST" action="${contextPath}/logout">
@@ -40,27 +42,29 @@
                 </h2>
             </c:if>
 
-            <form:form method="POST" action="${contextPath}/addFaculty" enctype="multipart/form-data">
-                <table>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Number Of Seats</th>
+                    <th>Image</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <c:forEach var="rating" items="${ratingItems}">
                     <tr>
-                        <td>Name</td>
-                        <td><input type="text" name="name"/></td>
+                        <td>${rating.id}</td>
+                        <td>${rating.faculty.name}</td>
+                        <td>${rating.faculty.numberOfSeats}</td>
+                        <td><img src="data:image/jpg;base64,${rating.faculty.encodedImage}" alt="image"
+                                 style="width: 10%"></td>
+                        <td><a href="rating?id= ${rating.id}">Delete</a></td>
                     </tr>
-                    <tr>
-                        <td>Number of Seats</td>
-                        <td><input type="number" name="numberOfSeats"/></td>
-                    </tr>
-                    <tr>
-                        <td>Select an image to upload</td>
-                        <td><input type="file" name="image" /></td>
-                    </tr>
-                    <tr>
-                        <td><input type="submit" value="Submit"/></td>
-                    </tr>
-                </table>
-                <input type="hidden" name="${_csrf.parameterName}"
-                       value="${_csrf.token}"/>
-            </form:form>
+                </c:forEach>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
